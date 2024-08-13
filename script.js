@@ -35,5 +35,15 @@ function validaCpf(cpf)
         return false
     }
 
+    if (cpf.length != 11 && cpf.length != 14)
+    {
+        alert("Formato inválido")
+        return false
+    }
+
+    // Verificar se os . e - estão no local correto ou se não tem 
+
+    // Algoitmo para validar cpf
+
     return true
 }

@@ -31,7 +31,7 @@ function validaCpf(cpf)
 
     if (!/^[\d.-]+$/.test(cpf)) 
     {
-        alert("CPF só pode conter números, '.' ou ','")
+        alert("CPF só pode conter números, '.' ou '-'")
         return false
     }
 
@@ -43,7 +43,63 @@ function validaCpf(cpf)
 
     // Verificar se os . e - estão no local correto ou se não tem 
 
-    // Algoitmo para validar cpf
+    if (cpf.length == 11 && !/^[\d]+$/.test(cpf))
+    {
+        alert("Formato inválido")
+        return false
+    }
+
+    // Não funciona //
+    if (cpf.length == 14 && !/[\d\d\d.\d\d\d.\d\d\d.\d\d]/.test(cpf))
+    {
+        alert("Formato inválido")
+        return false
+    }
+
+    // Algoritmo para validar cpf
+
+    cpf = (cpf.replaceAll('.', ''))
+    cpf = (cpf.replaceAll('-', ''))
+
+    // Primeiro dígito
+    soma = 0
+
+    for (i = 0; i < 9; i++)
+    {
+        soma += parseInt(cpf.substring(i, i+1)) * (10 - i)
+    }
+
+    resto = soma * 10 % 11
+    if (resto == 10)
+    {
+        resto = 0
+    }
+
+    if (resto != cpf.substring(9, 10))
+    {
+        alert("CPF inválido")
+        return false
+    }
+
+    // Segundo dígito
+    soma = 0
+
+    for (i = 0; i < 10; i++)
+    {
+        soma += parseInt(cpf.substring(i, i+1)) * (11 - i)
+    }
+    
+    resto = soma * 10 % 11
+    if (resto == 10)
+    {
+        resto = 0
+    }
+
+    if (resto != cpf.substring(10, 11))
+    {
+        alert("CPF inválido")
+        return false
+    }
 
     return true
 }

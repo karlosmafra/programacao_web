@@ -9,7 +9,7 @@ function submit()
 
     if (validaCpf(cpf))
     {
-        alert(cpf)
+        alert("CPF válido: " + cpf)
     }
 }
 
@@ -62,20 +62,20 @@ function validaCpf(cpf)
     cpf = (cpf.replaceAll('-', ''))
 
     // Primeiro dígito
-    soma = 0
+    let soma = 0
 
-    for (i = 0; i < 9; i++)
+    for (let i = 0; i < 9; i++)
     {
-        soma += parseInt(cpf.substring(i, i+1)) * (10 - i)
+        soma += parseInt(cpf.charAt(i)) * (10 - i)
     }
 
-    resto = soma * 10 % 11
+    let resto = soma * 10 % 11
     if (resto == 10)
     {
         resto = 0
     }
 
-    if (resto != cpf.substring(9, 10))
+    if (resto != cpf.charAt(9))
     {
         alert("CPF inválido")
         return false
@@ -84,7 +84,7 @@ function validaCpf(cpf)
     // Segundo dígito
     soma = 0
 
-    for (i = 0; i < 10; i++)
+    for (let i = 0; i < 10; i++)
     {
         soma += parseInt(cpf.substring(i, i+1)) * (11 - i)
     }
